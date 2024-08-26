@@ -7,6 +7,7 @@ public class NumbersToWordsConstants {
     private NumbersToWordsConstants() {
     }
 
+    public static final Map<Float, String> BASE_NUMBER_LOOKUP = new HashMap<>();
     // Base
     public static final String ZERO = "ZERO";
     public static final String ONE = "ONE";
@@ -18,7 +19,6 @@ public class NumbersToWordsConstants {
     public static final String SEVEN = "SEVEN";
     public static final String EIGHT = "EIGHT";
     public static final String NINE = "NINE";
-    public static final Map<Float, String> BASE_NUMBER_LOOKUP = new HashMap<>();
 
     // Teens
     public static final String ELEVEN = "ELEVEN";
@@ -32,6 +32,7 @@ public class NumbersToWordsConstants {
     public static final String NINETEEN = "NINETEEN";
 
     // Tens
+    public static final Map<Character, String> TENS_CHAR_LOOKUP = new HashMap<>();
     public static final String TEN = "TEN";
     public static final String TWENTY = "TWENTY";
     public static final String THIRTY = "THIRTY";
@@ -81,5 +82,14 @@ public class NumbersToWordsConstants {
         BASE_NUMBER_LOOKUP.put(1_000f, THOUSAND);
         BASE_NUMBER_LOOKUP.put(1_000_000_000f, MILLIARD);
         BASE_NUMBER_LOOKUP.put(1_000_000_000_000f, BILLION);
+
+        TENS_CHAR_LOOKUP.put('2', TWENTY);
+        TENS_CHAR_LOOKUP.put('3', THIRTY);
+        TENS_CHAR_LOOKUP.put('4', FORTY);
+        TENS_CHAR_LOOKUP.put('5', FIFTY);
+        TENS_CHAR_LOOKUP.put('6', SIXTY);
+        TENS_CHAR_LOOKUP.put('7', SEVENTY);
+        TENS_CHAR_LOOKUP.put('8', EIGHTY);
+        TENS_CHAR_LOOKUP.put('9', NINETY);
     }
 }
