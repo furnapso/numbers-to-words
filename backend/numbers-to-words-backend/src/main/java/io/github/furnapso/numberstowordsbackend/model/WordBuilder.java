@@ -31,8 +31,9 @@ public class WordBuilder {
         }
     }
 
-    public void addElement(String element) {
+    public WordBuilder addElement(String element) {
         elements.add(element);
+        return this;
     }
 
     public Float getWholeNumber() {
@@ -43,5 +44,9 @@ public class WordBuilder {
     public Float getDecimal() {
         Preconditions.checkState(hasDecimals, "Number does not have decimals");
         return decimal;
+    }
+
+    public String build() {
+        return "";
     }
 }
