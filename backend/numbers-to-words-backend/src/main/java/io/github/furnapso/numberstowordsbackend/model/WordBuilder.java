@@ -15,16 +15,19 @@ public class WordBuilder {
     private float number;
     private Float wholeNumber;
     private Float decimal;
+    private int wholeNumberLength;
 
     public WordBuilder(float number) {
         this.number = number;
         this.hasDecimals = number != Math.floor(number);
         this.numAsString = String.valueOf(number);
+        this.wholeNumberLength = numAsString.length();
 
         if (hasDecimals) {
             var parts = numAsString.split("\\.");
             this.wholeNumber = NumberUtils.toFloat(parts[0]);
             this.decimal = NumberUtils.toFloat(parts[1]);
+            this.wholeNumberLength = parts[0].length();
         }
     }
 
