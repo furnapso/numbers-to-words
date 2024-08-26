@@ -22,10 +22,11 @@ public class NumbersToWordsService {
 
         var numAsString = wordBuilder.getNumAsString();
         var wholeNumberLength = wordBuilder.getWholeNumberLength();
+        var baseNumber = NumberUtils.toFloat(String.valueOf(numAsString.charAt(wholeNumberLength - 1)));
+        wordBuilder.addElement(convertNumbersToWords(baseNumber));
 
         if (wholeNumberLength == 2) {
-            wordBuilder.addElement(String.valueOf(numAsString.charAt(1)))
-                    .addElement(TENS_CHAR_LOOKUP.get(numAsString.charAt(0)));
+            wordBuilder.addElement(TENS_CHAR_LOOKUP.get(numAsString.charAt(0)));
         } else if (wholeNumberLength == 3) {
             wordBuilder.addElement(convertNumbersToWords(NumberUtils.toFloat(numAsString.substring(0, 2))));
         }
