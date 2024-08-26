@@ -12,21 +12,24 @@ public class WordBuilder {
     private List<String> elements = new ArrayList<>();
     private boolean hasDecimals;
     private String numAsString;
-    private float number;
-    private Float wholeNumber;
-    private Float decimal;
-    private int wholeNumberLength;
+    private Float number;
+    private Integer wholeNumber;
+    private Integer decimal;
+    private String wholeNumberAsString;
+    private Integer wholeNumberLength;
 
-    public WordBuilder(float number) {
+    public WordBuilder(Float number) {
         this.number = number;
         this.hasDecimals = number != Math.floor(number);
         this.numAsString = String.valueOf(number);
-        this.wholeNumberLength = numAsString.length();
+        this.wholeNumber = number.intValue();
+        this.wholeNumberAsString = wholeNumber.toString();
+        this.wholeNumberLength = wholeNumberAsString.length();
 
         if (hasDecimals) {
             var parts = numAsString.split("\\.");
-            this.wholeNumber = NumberUtils.toFloat(parts[0]);
-            this.decimal = NumberUtils.toFloat(parts[1]);
+            this.wholeNumber = NumberUtils.toInt(parts[0]);
+            this.decimal = NumberUtils.toInt(parts[1]);
             this.wholeNumberLength = parts[0].length();
         }
     }
@@ -36,17 +39,32 @@ public class WordBuilder {
         return this;
     }
 
-    public Float getWholeNumber() {
+    public Integer getWholeNumber() {
         Preconditions.checkState(hasDecimals, "Number does not have decimals");
         return wholeNumber;
     }
 
-    public Float getDecimal() {
+    public Integer getDecimal() {
         Preconditions.checkState(hasDecimals, "Number does not have decimals");
         return decimal;
     }
 
     public String build() {
-        return "";
+        Preconditions.checkState(!elements.isEmpty(), "Must have at least one element");
+
+        var length = elements.size();
+        var builder = new StringBuilder();
+        var reversed = elements.reversed();
+
+        if (length == 1) {
+            builder.append(elements.getFirst());
+            if (hasDecimals) {
+                builder.append(" CENTS");
+            } else {
+                builder.append(" DOLLARS");
+            }
+        }
+
+        return builder.toString();
     }
 }
