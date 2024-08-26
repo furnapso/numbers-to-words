@@ -1,5 +1,8 @@
 package io.github.furnapso.numberstowordsbackend.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NumbersToWordsConstants {
     private NumbersToWordsConstants() {
     }
@@ -15,6 +18,7 @@ public class NumbersToWordsConstants {
     public static final String SEVEN = "SEVEN";
     public static final String EIGHT = "EIGHT";
     public static final String NINE = "NINE";
+    public static final Map<Float, String> BASE_NUMBER_LOOKUP = new HashMap<>();
 
     // Teens
     public static final String ELEVEN = "ELEVEN";
@@ -43,25 +47,39 @@ public class NumbersToWordsConstants {
     public static final String THOUSAND = "THOUSAND";
     public static final String MILLIARD = "MILLIARD";
     public static final String BILLION = "BILLION";
-    public static final String BILLIARD = "BILLIARD";
-    public static final String TRILLION = "TRILLION";
-    public static final String QUADRILLION = "QUADRILLION";
-    public static final String QUINTILLION = "QUINTILLION";
-    public static final String SEXTILLION = "SEXTILLION";
-    public static final String SEPTILLION = "SEPTILLION";
-    public static final String OCTILLION = "OCTILLION";
-    public static final String NONILLION = "NONILLION";
-    public static final String DECILLION = "DECILLION";
-    public static final String UNDECILLION = "UNDECILLION";
-    public static final String DUODECILLION = "DUODECILLION";
-    public static final String TREDECILLION = "TREDECILLION";
-    public static final String QUATTUORDECILLION = "QUATTUORDECILLION";
-    public static final String QUINDECILLION = "QUINDECILLION";
-    public static final String SEXDECILLION = "SEXDECILLION";
-    public static final String SEPTENDECILLION = "SEPTENDECILLION";
-    public static final String OCTODECILLION = "OCTODECILLION";
-    public static final String NOVEMDECILLION = "NOVEMDECILLION";
-    public static final String VIGINTILLION = "VIGINTILLION";
-    public static final String CENTILLION = "CENTILLION";
 
+    static {
+        BASE_NUMBER_LOOKUP.put(0f, ZERO);
+        BASE_NUMBER_LOOKUP.put(1f, ONE);
+        BASE_NUMBER_LOOKUP.put(2f, TWO);
+        BASE_NUMBER_LOOKUP.put(3f, THREE);
+        BASE_NUMBER_LOOKUP.put(4f, FOUR);
+        BASE_NUMBER_LOOKUP.put(5f, FIVE);
+        BASE_NUMBER_LOOKUP.put(6f, SIX);
+        BASE_NUMBER_LOOKUP.put(7f, SEVEN);
+        BASE_NUMBER_LOOKUP.put(8f, EIGHT);
+        BASE_NUMBER_LOOKUP.put(9f, NINE);
+        BASE_NUMBER_LOOKUP.put(10f, TEN);
+        BASE_NUMBER_LOOKUP.put(11f, ELEVEN);
+        BASE_NUMBER_LOOKUP.put(12f, TWELVE);
+        BASE_NUMBER_LOOKUP.put(13f, THIRTEEN);
+        BASE_NUMBER_LOOKUP.put(14f, FOURTEEN);
+        BASE_NUMBER_LOOKUP.put(15f, FIFTEEN);
+        BASE_NUMBER_LOOKUP.put(16f, SIXTEEN);
+        BASE_NUMBER_LOOKUP.put(17f, SEVENTEEN);
+        BASE_NUMBER_LOOKUP.put(18f, EIGHTEEN);
+        BASE_NUMBER_LOOKUP.put(19f, NINETEEN);
+        BASE_NUMBER_LOOKUP.put(20f, TWENTY);
+        BASE_NUMBER_LOOKUP.put(30f, THIRTY);
+        BASE_NUMBER_LOOKUP.put(40f, FORTY);
+        BASE_NUMBER_LOOKUP.put(50f, FIFTY);
+        BASE_NUMBER_LOOKUP.put(60f, SIXTY);
+        BASE_NUMBER_LOOKUP.put(70f, SEVENTY);
+        BASE_NUMBER_LOOKUP.put(80f, EIGHTY);
+        BASE_NUMBER_LOOKUP.put(90f, NINETY);
+        BASE_NUMBER_LOOKUP.put(100f, HUNDRED);
+        BASE_NUMBER_LOOKUP.put(1_000f, THOUSAND);
+        BASE_NUMBER_LOOKUP.put(1_000_000_000f, MILLIARD);
+        BASE_NUMBER_LOOKUP.put(1_000_000_000_000f, BILLION);
+    }
 }
