@@ -72,7 +72,7 @@ public class NumberToWordParser {
                     .append(getBelowTwenty(number / 100))
                     .append(" HUNDRED ");
             var belowThousand = convertBelowThousand(number % 100);
-            if (!"".equals(belowThousand)) {
+            if (StringUtils.isNotBlank(belowThousand)) {
                 stringBuilder.append(" AND ");
             }
             return stringBuilder
