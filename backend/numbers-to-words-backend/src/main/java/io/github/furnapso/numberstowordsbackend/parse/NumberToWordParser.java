@@ -25,6 +25,11 @@ public class NumberToWordParser {
 
     public String parse() {
         var stack = new ArrayList<String>();
+
+        if (number.signum() == -1) {
+            stack.add("NEGATIVE");
+        }
+
         if (dollars > 0) {
             stack.add(convertToWords(dollars));
             stack.add(dollars == 1 ? "DOLLAR" : "DOLLARS");
@@ -38,10 +43,6 @@ public class NumberToWordParser {
         if (cents > 0) {
             stack.add(convertToWords(cents));
             stack.add(cents == 1 ? "CENT" : "CENTS");
-        }
-
-        if (!number.abs().equals(number)) {
-            stack.addFirst("NEGATIVE");
         }
 
         return StringUtils.normalizeSpace(String.join(" ", stack));
