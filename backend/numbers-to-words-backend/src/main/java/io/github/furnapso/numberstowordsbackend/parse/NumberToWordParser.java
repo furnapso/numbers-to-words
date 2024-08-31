@@ -1,11 +1,10 @@
 package io.github.furnapso.numberstowordsbackend.parse;
 
 import io.github.furnapso.numberstowordsbackend.util.ThousandsContext;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.getBelowTwenty;
@@ -16,12 +15,10 @@ public class NumberToWordParser {
     private int cents;
     private ArrayList<String> wordStack = new ArrayList<>();
 
-    public NumberToWordParser(Float number) {
-        var numberBigDecimal = BigDecimal.valueOf(number).setScale(2, RoundingMode.HALF_UP);
-        var elements = numberBigDecimal.toString().split("\\.");
+    public NumberToWordParser(BigDecimal number) {
+        var elements = number.toString().split("\\.");
         dollars = NumberUtils.toInt(elements[0]);
         cents = NumberUtils.toInt(elements[1]);
-        System.out.println(number);
     }
 
     public String parse() {
@@ -38,7 +35,7 @@ public class NumberToWordParser {
             wordStack.add(cents == 1 ? "CENT" : "CENTS");
         }
 
-        return String.join(" ", wordStack);
+        return StringUtils.normalizeSpace(String.join(" ", wordStack));
     }
 
     private String convertToWords(int number) {
@@ -46,7 +43,7 @@ public class NumberToWordParser {
         var stack = new ArrayList<String>();
         while (number > 0) {
             if (number % 1000 != 0) {
-                 stack.addFirst(convertBelowThousand(number % 1000) + " " + thousandsContext);
+                stack.addFirst(convertBelowThousand(number % 1000) + " " + thousandsContext);
             }
             thousandsContext.increment();
             number = number / 1000;
