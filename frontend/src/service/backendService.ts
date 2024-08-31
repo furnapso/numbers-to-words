@@ -1,7 +1,7 @@
 import {ofetch} from "ofetch";
 
 const client = ofetch.create({
-    baseURL: import.meta.env.BASE_URL,
+    baseURL: import.meta.env.VITE_BACKEND_URL,
     mode: "cors"
 });
 
