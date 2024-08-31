@@ -32,11 +32,11 @@ class NumberToWordParserUnitTest extends Specification {
         parser.parse() == expectedWords
 
         where:
-        number                          || expectedWords
-        new BigDecimal("100.00")        || "ONE HUNDRED DOLLARS"
-        new BigDecimal("999999.99")     || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
-        new BigDecimal("999999999.99") || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
-        new BigDecimal("1000000.00")    || "ONE MILLION DOLLARS"
+        number                         || expectedWords
+        new BigDecimal("100.00")       || "ONE HUNDRED DOLLARS"
+        new BigDecimal("999999.99")    || "NINE HUNDRED NINETY NINE THOUSAND, NINE HUNDRED AND NINETY NINE DOLLARS AND NINETY NINE CENTS"
+        new BigDecimal("999999999.99") || "NINE HUNDRED NINETY NINE MILLION, NINE HUNDRED NINETY NINE THOUSAND, NINE HUNDRED AND NINETY NINE DOLLARS AND NINETY NINE CENTS"
+        new BigDecimal("1000000.00")   || "ONE MILLION DOLLARS"
     }
 
     def "should handle negative numbers gracefully"() {
@@ -48,5 +48,21 @@ class NumberToWordParserUnitTest extends Specification {
 
         then:
         result == "NEGATIVE ONE HUNDRED AND TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
+    }
+
+    def "should handle the maximum number correctly"() {
+        given:
+        def parser = new NumberToWordParser(new BigDecimal("999999999999999.99"))
+
+        expect:
+        parser.parse() == "NINE HUNDRED NINETY NINE TRILLION, NINE HUNDRED NINETY NINE BILLION, NINE HUNDRED NINETY NINE MILLION, NINE HUNDRED NINETY NINE THOUSAND, NINE HUNDRED AND NINETY NINE DOLLARS AND NINETY NINE CENTS"
+    }
+
+    def "should throw an exception for numbers exceeding the maximum limit"() {
+        when:
+        new NumberToWordParser(new BigDecimal("1000000000000000.00"))
+
+        then:
+        thrown(IllegalArgumentException)
     }
 }

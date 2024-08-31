@@ -17,7 +17,7 @@ public class NumberToWordParser {
     private final long dollars;
     private final long cents;
     private BigDecimal number;
-    private static final BigDecimal MAX = new BigDecimal("999999999999999");
+    private static final BigDecimal MAX = new BigDecimal("999999999999999.99");
 
     public NumberToWordParser(BigDecimal number) {
         Preconditions.checkArgument(number.compareTo(MAX) < 1, String.format("Maximum supported number is %s", MAX));
