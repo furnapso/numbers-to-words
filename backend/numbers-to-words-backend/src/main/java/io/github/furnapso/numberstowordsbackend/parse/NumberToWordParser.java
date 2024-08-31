@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.getBelowTwenty;
-import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.getTens;
+import static io.github.furnapso.numberstowordsbackend.util.NumbersToWordsUtil.getBelowTwenty;
+import static io.github.furnapso.numberstowordsbackend.util.NumbersToWordsUtil.getTens;
 
 public class NumberToWordParser {
     public static final String AND = " AND ";

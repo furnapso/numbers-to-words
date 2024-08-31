@@ -1,4 +1,4 @@
-package io.github.furnapso.numberstowordsbackend.model;
+package io.github.furnapso.numberstowordsbackend.util;
 
 import java.util.HashMap;
 import java.util.Map;
