@@ -1,4 +1,4 @@
-package io.github.furnapso.numberstowordsbackend.model;
+package io.github.furnapso.numberstowordsbackend.util;
 
 import com.google.common.base.Preconditions;
 import lombok.Data;
