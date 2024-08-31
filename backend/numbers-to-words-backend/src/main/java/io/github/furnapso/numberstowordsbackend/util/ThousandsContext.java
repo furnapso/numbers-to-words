@@ -1,21 +1,20 @@
 package io.github.furnapso.numberstowordsbackend.util;
 
+import java.util.List;
+
 public class ThousandsContext {
-    private String current = "";
+    private int currentIndex = 0;
+    private static final List<String> LOOKUP = List.of("", "THOUSAND", "MILLION", "BILLION", "TRILLION");
+
     public void increment() {
-        switch (current) {
-            case "" -> current = "THOUSAND";
-            case "THOUSAND" -> current = "MILLION";
-            case "MILLION" -> current = "BILLION";
-            case "BILLION" -> current = "TRILLION";
-        }
+        currentIndex++;
     }
 
     public String toString() {
-        return current;
+        return LOOKUP.get(currentIndex);
     }
 
-    public void reset() {
-        current = "";
+    public String getLast() {
+        return LOOKUP.get(currentIndex - 1);
     }
 }

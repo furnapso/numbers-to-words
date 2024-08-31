@@ -12,6 +12,7 @@ import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.
 import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.getTens;
 
 public class NumberToWordParser {
+    public static final String AND = " AND ";
     private final int dollars;
     private final int cents;
     private BigDecimal number;
@@ -59,7 +60,14 @@ public class NumberToWordParser {
             number = number / 1000;
         }
 
-        return String.join(" AND ", stack);
+        if (StringUtils.isNotBlank(thousandsContext.getLast())) {
+            var last = stack.getLast();
+            stack.remove(last);
+            var first = String.join(", ", stack).replace(AND, "");
+            return stack.isEmpty() ? last : String.join(", ", first, last);
+        } else {
+            return String.join(AND, stack);
+        }
     }
 
     private String convertBelowThousand(int number) {
@@ -73,7 +81,7 @@ public class NumberToWordParser {
                     .append(" HUNDRED ");
             var belowThousand = convertBelowThousand(number % 100);
             if (StringUtils.isNotBlank(belowThousand)) {
-                stringBuilder.append(" AND ");
+                stringBuilder.append(AND);
             }
             return stringBuilder
                     .append(belowThousand)

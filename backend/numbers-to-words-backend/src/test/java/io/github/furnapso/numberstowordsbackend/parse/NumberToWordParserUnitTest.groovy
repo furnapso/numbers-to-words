@@ -32,10 +32,11 @@ class NumberToWordParserUnitTest extends Specification {
         parser.parse() == expectedWords
 
         where:
-        number                       || expectedWords
-        new BigDecimal("100.00")     || "ONE HUNDRED DOLLARS"
-        new BigDecimal("999999.99")  || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
-        new BigDecimal("1000000.00") || "ONE MILLION DOLLARS"
+        number                          || expectedWords
+        new BigDecimal("100.00")        || "ONE HUNDRED DOLLARS"
+        new BigDecimal("999999.99")     || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
+        new BigDecimal("999999999.99") || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
+        new BigDecimal("1000000.00")    || "ONE MILLION DOLLARS"
     }
 
     def "should handle negative numbers gracefully"() {
