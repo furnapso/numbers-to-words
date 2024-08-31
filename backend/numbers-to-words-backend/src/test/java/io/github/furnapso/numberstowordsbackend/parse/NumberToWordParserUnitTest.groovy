@@ -1,83 +1,51 @@
 package io.github.furnapso.numberstowordsbackend.parse
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class NumberToWordParserUnitTest extends Specification {
 
-    def "should convert 100 to 'one hundred'"() {
+    @Unroll
+    def "should correctly parse #number to words"() {
         given:
-        def parser = new NumberToWordParser(100)
+        def parser = new NumberToWordParser(number)
 
-        when:
-        def result = parser.parse()
+        expect:
+        parser.parse() == expectedWords
 
-        then:
-        result == "one hundred"
+        where:
+        number                    || expectedWords
+        new BigDecimal("123.45")  || "ONE HUNDRED TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
+        new BigDecimal("1.01")    || "ONE DOLLAR AND ONE CENT"
+        new BigDecimal("0.00")    || "ZERO DOLLARS"
+        new BigDecimal("1000.00") || "ONE THOUSAND DOLLARS"
+        new BigDecimal("200.01")  || "TWO HUNDRED DOLLARS AND ONE CENT"
+        new BigDecimal("0.99")    || "NINETY NINE CENTS"
     }
 
-    def "should convert 25 to 'twenty five'"() {
+    @Unroll
+    def "should handle edge cases for #number"() {
         given:
-        def parser = new NumberToWordParser(25)
+        def parser = new NumberToWordParser(number)
 
-        when:
-        def result = parser.parse()
+        expect:
+        parser.parse() == expectedWords
 
-        then:
-        result == "twenty five"
+        where:
+        number                       || expectedWords
+        new BigDecimal("100.00")     || "ONE HUNDRED DOLLARS"
+        new BigDecimal("999999.99")  || "NINE HUNDRED NINETY NINE THOUSAND NINE HUNDRED NINETY NINE DOLLARS AND NINETY NINE CENTS"
+        new BigDecimal("1000000.00") || "ONE MILLION DOLLARS"
     }
 
-    def "should convert 123 to 'one hundred twenty three'"() {
+    def "should handle negative numbers gracefully"() {
         given:
-        def parser = new NumberToWordParser(123)
+        def parser = new NumberToWordParser(new BigDecimal("-123.45"))
 
         when:
         def result = parser.parse()
 
         then:
-        result == "one hundred twenty three"
-    }
-
-    def "should convert 0 to 'zero'"() {
-        given:
-        def parser = new NumberToWordParser(0)
-
-        when:
-        def result = parser.parse()
-
-        then:
-        result == "zero"
-    }
-
-    def "should convert 101 to 'one hundred one'"() {
-        given:
-        def parser = new NumberToWordParser(101)
-
-        when:
-        def result = parser.parse()
-
-        then:
-        result == "one hundred one"
-    }
-
-    def "should convert 1000 to 'one thousand'"() {
-        given:
-        def parser = new NumberToWordParser(1000)
-
-        when:
-        def result = parser.parse()
-
-        then:
-        result == "one thousand"
-    }
-
-    def "should convert 2500.50 to 'two thousand five hundred DOLLARS and fifty cents'"() {
-        given:
-        def parser = new NumberToWordParser(2500.50)
-
-        when:
-        def result = parser.parse()
-
-        then:
-        result == "two thousand five hundred DOLLARS and fifty cents"
+        result == "NEGATIVE ONE HUNDRED TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
     }
 }
