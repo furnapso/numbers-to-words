@@ -1,6 +1,6 @@
 package io.github.furnapso.numberstowordsbackend.service;
 
-import io.github.furnapso.numberstowordsbackend.model.WordBuilder;
+import io.github.furnapso.numberstowordsbackend.util.WordBuilder;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
