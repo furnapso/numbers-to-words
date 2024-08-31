@@ -1,5 +1,6 @@
 package io.github.furnapso.numberstowordsbackend.parse;
 
+import com.google.common.base.Preconditions;
 import io.github.furnapso.numberstowordsbackend.util.ThousandsContext;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -13,15 +14,17 @@ import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.
 
 public class NumberToWordParser {
     public static final String AND = " AND ";
-    private final int dollars;
-    private final int cents;
+    private final long dollars;
+    private final long cents;
     private BigDecimal number;
+    private static final BigDecimal MAX = new BigDecimal("999999999999999");
 
     public NumberToWordParser(BigDecimal number) {
+        Preconditions.checkArgument(number.compareTo(MAX) < 1, String.format("Maximum supported number is %s", MAX));
         this.number = number.setScale(2, RoundingMode.HALF_UP);
-        var elements = number.abs().toString().split("\\.");
-        dollars = NumberUtils.toInt(elements[0]);
-        cents = NumberUtils.toInt(elements[1]);
+        var elements = this.number.abs().toString().split("\\.");
+        dollars = NumberUtils.toLong(elements[0]);
+        cents = NumberUtils.toLong(elements[1]);
     }
 
     public String parse() {
@@ -49,7 +52,7 @@ public class NumberToWordParser {
         return StringUtils.normalizeSpace(String.join(" ", stack));
     }
 
-    private String convertToWords(int number) {
+    private String convertToWords(long number) {
         var thousandsContext = new ThousandsContext();
         var stack = new ArrayList<String>();
         while (number > 0) {
@@ -70,7 +73,7 @@ public class NumberToWordParser {
         }
     }
 
-    private String convertBelowThousand(int number) {
+    private String convertBelowThousand(long number) {
         if (number < 20) {
             return getBelowTwenty(number);
         } else if (number < 100) {
