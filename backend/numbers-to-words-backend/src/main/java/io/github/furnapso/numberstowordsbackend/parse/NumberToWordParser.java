@@ -11,9 +11,9 @@ import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.
 import static io.github.furnapso.numberstowordsbackend.model.NumbersToWordsUtil.getTens;
 
 public class NumberToWordParser {
-    private int dollars;
-    private int cents;
-    private ArrayList<String> wordStack = new ArrayList<>();
+    private final int dollars;
+    private final int cents;
+    private final ArrayList<String> wordStack = new ArrayList<>();
 
     public NumberToWordParser(BigDecimal number) {
         var elements = number.toString().split("\\.");
