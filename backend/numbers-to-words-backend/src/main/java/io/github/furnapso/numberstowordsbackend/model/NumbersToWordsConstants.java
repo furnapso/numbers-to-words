@@ -7,7 +7,8 @@ public class NumbersToWordsConstants {
     private NumbersToWordsConstants() {
     }
 
-    public static final Map<Float, String> BASE_NUMBER_LOOKUP = new HashMap<>();
+    public static final Map<Float, String> BASE_NUMBER_LOOKUP;
+    public static final Map<Character, String> BASE_CHAR_LOOKUP;
     // Base
     public static final String ZERO = "ZERO";
     public static final String ONE = "ONE";
@@ -32,7 +33,7 @@ public class NumbersToWordsConstants {
     public static final String NINETEEN = "NINETEEN";
 
     // Tens
-    public static final Map<Character, String> TENS_CHAR_LOOKUP = new HashMap<>();
+    public static final Map<Character, String> TENS_CHAR_LOOKUP;
     public static final String TEN = "TEN";
     public static final String TWENTY = "TWENTY";
     public static final String THIRTY = "THIRTY";
@@ -50,6 +51,7 @@ public class NumbersToWordsConstants {
     public static final String BILLION = "BILLION";
 
     static {
+        BASE_NUMBER_LOOKUP = new HashMap<>();
         BASE_NUMBER_LOOKUP.put(0f, ZERO);
         BASE_NUMBER_LOOKUP.put(1f, ONE);
         BASE_NUMBER_LOOKUP.put(2f, TWO);
@@ -83,6 +85,19 @@ public class NumbersToWordsConstants {
         BASE_NUMBER_LOOKUP.put(1_000_000_000f, MILLIARD);
         BASE_NUMBER_LOOKUP.put(1_000_000_000_000f, BILLION);
 
+        BASE_CHAR_LOOKUP = new HashMap<>();
+        BASE_CHAR_LOOKUP.put('0', ZERO);
+        BASE_CHAR_LOOKUP.put('1', ONE);
+        BASE_CHAR_LOOKUP.put('2', TWO);
+        BASE_CHAR_LOOKUP.put('3', THREE);
+        BASE_CHAR_LOOKUP.put('4', FOUR);
+        BASE_CHAR_LOOKUP.put('5', FIVE);
+        BASE_CHAR_LOOKUP.put('6', SIX);
+        BASE_CHAR_LOOKUP.put('7', SEVEN);
+        BASE_CHAR_LOOKUP.put('8', EIGHT);
+        BASE_CHAR_LOOKUP.put('9', NINE);
+
+        TENS_CHAR_LOOKUP = new HashMap<>();
         TENS_CHAR_LOOKUP.put('2', TWENTY);
         TENS_CHAR_LOOKUP.put('3', THIRTY);
         TENS_CHAR_LOOKUP.put('4', FORTY);
@@ -91,5 +106,19 @@ public class NumbersToWordsConstants {
         TENS_CHAR_LOOKUP.put('7', SEVENTY);
         TENS_CHAR_LOOKUP.put('8', EIGHTY);
         TENS_CHAR_LOOKUP.put('9', NINETY);
+    }
+
+    public static String getBaseWordFromChar(Character c) {
+        return BASE_CHAR_LOOKUP.get(c);
+    }
+
+    public static String getBaseWordFromString(String s) {
+        var c = s.charAt(0);
+        return BASE_CHAR_LOOKUP.get(c);
+    }
+
+    public static String getTensWordFromString(String s) {
+        var c = s.charAt(0);
+        return TENS_CHAR_LOOKUP.get(c);
     }
 }
