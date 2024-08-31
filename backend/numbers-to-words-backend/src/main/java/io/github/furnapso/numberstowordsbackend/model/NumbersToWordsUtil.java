@@ -35,7 +35,7 @@ public class NumbersToWordsUtil {
         TENS = new HashMap<>();
         TENS.put(2, "TWENTY");
         TENS.put(3, "THIRTY");
-        TENS.put(4, "FOURTY");
+        TENS.put(4, "FORTY");
         TENS.put(5, "FIFTY");
         TENS.put(6, "SIXTY");
         TENS.put(7, "SEVENTY");
