@@ -15,7 +15,7 @@ class NumberToWordParserUnitTest extends Specification {
 
         where:
         number                    || expectedWords
-        new BigDecimal("123.45")  || "ONE HUNDRED TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
+        new BigDecimal("123.45")  || "ONE HUNDRED AND TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
         new BigDecimal("1.01")    || "ONE DOLLAR AND ONE CENT"
         new BigDecimal("0.00")    || "ZERO DOLLARS"
         new BigDecimal("1000.00") || "ONE THOUSAND DOLLARS"
@@ -46,6 +46,6 @@ class NumberToWordParserUnitTest extends Specification {
         def result = parser.parse()
 
         then:
-        result == "NEGATIVE ONE HUNDRED TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
+        result == "NEGATIVE ONE HUNDRED AND TWENTY THREE DOLLARS AND FORTY FIVE CENTS"
     }
 }

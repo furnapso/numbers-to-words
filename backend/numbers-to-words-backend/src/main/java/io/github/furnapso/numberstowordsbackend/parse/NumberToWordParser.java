@@ -59,7 +59,7 @@ public class NumberToWordParser {
             number = number / 1000;
         }
 
-        return String.join(" ", stack);
+        return String.join(" AND ", stack);
     }
 
     private String convertBelowThousand(int number) {
@@ -68,7 +68,16 @@ public class NumberToWordParser {
         } else if (number < 100) {
             return getTens(number / 10) + " " + getBelowTwenty(number % 10);
         } else {
-            return getBelowTwenty(number / 100) + " HUNDRED " + convertBelowThousand(number % 100);
+            var stringBuilder = new StringBuilder()
+                    .append(getBelowTwenty(number / 100))
+                    .append(" HUNDRED ");
+            var belowThousand = convertBelowThousand(number % 100);
+            if (!"".equals(belowThousand)) {
+                stringBuilder.append(" AND ");
+            }
+            return stringBuilder
+                    .append(belowThousand)
+                    .toString();
         }
     }
 }
