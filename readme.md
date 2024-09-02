@@ -18,8 +18,9 @@ This is an example of how to list things you need to use the software and how to
 * Maven >= 3.9
 
 #### Developing locally
-- Start the Springboot app with `mvn springboot:run`
-- Start the vite app with `npm run dev`
+- Clone the project: `git clone git@github.com:furnapso/numbers-to-words.git && cd numbers-to-words`
+- Start the Springboot app with `cd backend && mvn springboot:run`
+- Start the vite app with `cd frontend && npm run dev`
 
 ### Docker
 - Run `build.ps1` or `build.sh` depending on your OS
