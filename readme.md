@@ -9,8 +9,6 @@ This project is a web application that converts numerical input into its corresp
 
 ## Getting Started
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 * Node.js
 * npm
 * JDK >= 21
